@@ -4,8 +4,10 @@ export interface ExchangeInfo {
 
 export interface BinancePair {
   symbol: string;
-  priceChange: number;
+  priceChangePercent: number;
   lastPrice: number;
+  highPrice: number;
+  lowPrice: number;
   volume: number;
 }
 
