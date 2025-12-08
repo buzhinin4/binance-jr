@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+}
+
+[data-theme='dark'] {
+  --background: black;
+  --text: white;
+}
+
+[data-theme='brand'] {
+  --background: white;
+  --text: black;
+}
+
+html {
+  background: var(--background);
+  color: var(--text);
+}
