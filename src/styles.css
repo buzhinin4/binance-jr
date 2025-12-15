@@ -1,17 +1,36 @@
 @import url(app/styles/reset-styles.css);
 @import url(app/styles/fonts.css);
 
+:root {
+  --color-accent: #2d6cff;
+  --color-accent-red: #ff4d4d;
+  --color-accent-green: #37d67a;
+
+  --gap: 16px;
+  --radius: 10px;
+  --header-height: 72px;
+
+  --color-overlay: rgba(0, 0, 0, 0.48);
+  --blur-overlay: blur(4px);
+}
+
 [data-theme='dark'] {
-  --background: black;
-  --text: white;
+  --color-bg: #0e0f11;
+  --color-bg-secondary: #16181d;
+  --color-border: #25272d;
+  --color-text: #ffffff;
+  --color-text-secondary: #8c8f96;
 }
 
 [data-theme='light'] {
-  --background: white;
-  --text: black;
+  --color-bg: #f2f3f5;
+  --color-bg-secondary: #ffffff;
+  --color-border: #d5d8df;
+  --color-text: #0c0d0f;
+  --color-text-secondary: #6b7078;
 }
 
 html {
-  background: var(--background);
-  color: var(--text);
+  background: var(--color-bg);
+  color: var(--color-text);
 }
