@@ -1,0 +1,147 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay);
+  backdrop-filter: var(--blur-overlay);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 20px 24px;
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+}
+
+.pairs-viewport {
+  height: 80vh;
+  width: 600px;
+  background: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-border);
+  position: relative;
+  overflow: left;
+}
+
+.search-wrapper {
+  padding: 12px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--color-radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 36px 1fr 1fr 1fr 1fr;
+  padding: 10px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 56px;
+  z-index: 2;
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.table-header button {
+  padding: 2px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 25%;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+.right {
+  text-align: right;
+}
+
+.favorites-section {
+  padding: 8px 0;
+  background: var(--color-bg);
+}
+
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.favorites-count {
+  background: var(--color-accent);
+  padding: 0px 6px;
+  border-radius: 6px;
+  color: var(--color-text);
+}
+
+.favorites-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 6px 0;
+}
+
+.pair-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 1fr 1fr 1fr;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pair-row:hover {
+  background: var(--color-bg);
+}
+
+.favorite-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.favorite-btn.active {
+  opacity: 1;
+  filter: brightness(1.2);
+}
+
+.positive {
+  color: var(--accent-green);
+}
+
+.negative {
+  color: var(--accent-red);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: var(--text);
+  font-size: 14px;
+}
