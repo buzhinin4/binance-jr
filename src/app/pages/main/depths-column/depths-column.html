@@ -1,0 +1,37 @@
+<div class="book-wrapper">
+  <div class="side asks">
+    <div class="side--header">
+      <h3>Asks</h3>
+      <h4>price</h4>
+      <h4>volume</h4>
+    </div>
+    @if(depth() != null){
+    <div class="side--grid">
+      @for (ask of depth()!.asks; track ask.price) {
+      <span class="price">{{ ask.price }}</span>
+      <span class="qty">{{ ask.quantity }}</span>
+      }
+    </div>
+    } @else {
+    <span>asks loading</span>
+    }
+  </div>
+
+  <div class="side bids">
+    <div class="side--header">
+      <h3>Bids</h3>
+      <h4>price</h4>
+      <h4>volume</h4>
+    </div>
+    @if(depth() != null){
+    <div class="side--grid">
+      @for (bid of depth()?.bids; track bid.price) {
+      <span class="price">{{ bid.price }}</span>
+      <span class="qty">{{ bid.quantity }}</span>
+      }
+    </div>
+    }@else {
+    <span>bids Loading</span>
+    }
+  </div>
+</div>
