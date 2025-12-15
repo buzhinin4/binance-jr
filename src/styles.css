@@ -1,12 +1,12 @@
-:root {
-}
+@import url(app/styles/reset-styles.css);
+@import url(app/styles/fonts.css);
 
 [data-theme='dark'] {
   --background: black;
   --text: white;
 }
 
-[data-theme='brand'] {
+[data-theme='light'] {
   --background: white;
   --text: black;
 }
