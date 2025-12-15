@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 import { KlinesActions } from './klines.actions';
 import { BinanceRestService } from '../../core/services/binance-rest-service';
@@ -47,8 +47,8 @@ export class KlinesEffects {
             };
 
             return k.x
-              ? KlinesActions.liveClosed({ candle }) // свеча закрылась
-              : KlinesActions.liveUpdate({ candle }); // свеча обновляется
+              ? KlinesActions.liveClosed({ candle })
+              : KlinesActions.liveUpdate({ candle });
           })
         );
       })

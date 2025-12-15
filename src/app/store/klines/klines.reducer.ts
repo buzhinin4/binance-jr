@@ -1,10 +1,11 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { KlinesActions } from './klines.actions';
-import { BinanceKline } from '../../core/types/knile.interface';
+import { BinanceInterval, BinanceKline } from '../../core/types/knile.interface';
 
 export const klinesFeatureKey = 'klines';
 
 export interface State {
+  selectedInterval: BinanceInterval;
   historical: BinanceKline[];
   live: BinanceKline | null;
   loading: boolean;
@@ -12,6 +13,7 @@ export interface State {
 }
 
 export const initialState: State = {
+  selectedInterval: '1m',
   historical: [],
   live: null,
   loading: false,
@@ -20,6 +22,12 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
+
+  on(KlinesActions.select, (state, { selectedInterval }) => ({
+    ...state,
+    selectedInterval,
+  })),
+
   on(KlinesActions.load, (state) => ({
     ...state,
     loading: true,
