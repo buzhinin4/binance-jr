@@ -9,7 +9,7 @@ export class ThemeService {
   public readonly themeSignal = this._themeSignal.asReadonly();
 
   private loadTheme(): Theme {
-    const json = localStorage.getItem('favorites');
+    const json = localStorage.getItem('theme');
     try {
       return json ? JSON.parse(json) : 'light';
     } catch {
