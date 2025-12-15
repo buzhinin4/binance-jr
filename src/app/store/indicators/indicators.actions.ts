@@ -6,8 +6,10 @@ export const IndicatorsActions = createActionGroup({
   events: {
     'calculate sma': props<{ period: number }>(),
     'sma ready': props<{ period: number; values: IndicatorValue[] }>(),
+    'sma clear': emptyProps(),
 
     'calculate ema': props<{ period: number }>(),
     'ema ready': props<{ period: number; values: IndicatorValue[] }>(),
+    'ema clear': emptyProps(),
   },
 });
