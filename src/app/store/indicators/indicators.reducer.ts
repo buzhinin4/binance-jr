@@ -23,12 +23,20 @@ export const reducer = createReducer(
       values,
     },
   })),
+  on(IndicatorsActions.emaClear, (state) => ({
+    ...state,
+    ema: null,
+  })),
   on(IndicatorsActions.smaReady, (state, { period, values }) => ({
     ...state,
     sma: {
       period,
       values,
     },
+  })),
+  on(IndicatorsActions.smaClear, (state) => ({
+    ...state,
+    sma: null,
   }))
 );
 

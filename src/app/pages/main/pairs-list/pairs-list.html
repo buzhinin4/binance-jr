@@ -1,0 +1,111 @@
+<div class="overlay" (click)="onClose()"></div>
+<div class="modal">
+  <div class="search-wrapper">
+    <input
+      type="text"
+      placeholder="Search pair"
+      [value]="search()"
+      (input)="onSearch($any($event.target).value)"
+      class="search-input"
+    />
+  </div>
+  <div class="table-header">
+    <div class="favorite-col"></div>
+    <div class="col-pair">Пара</div>
+    <div class="col-price right">
+      Цена
+      <button (click)="sortBy('price')" [class.active]="sort().field === 'price'">
+        {{ sort().field === 'price' ? (sort().direction === 'desc' ? '↓' : '↑') : '↕' }}
+      </button>
+    </div>
+    <div class="col-change right">
+      Изменение 24ч
+      <button (click)="sortBy('change')" [class.active]="sort().field === 'change'">
+        {{ sort().field === 'change' ? (sort().direction === 'desc' ? '↓' : '↑') : '↕' }}
+      </button>
+    </div>
+    <div class="col-volume right">
+      Объём 24ч
+      <button (click)="sortBy('volume')" [class.active]="sort().field === 'volume'">
+        {{ sort().field === 'volume' ? (sort().direction === 'desc' ? '↓' : '↑') : '↕' }}
+      </button>
+    </div>
+  </div>
+  <cdk-virtual-scroll-viewport itemSize="56" class="pairs-viewport">
+    @if(favoritePairs().length > 0){
+    <div class="favorites-section">
+      <div class="favorites-header">
+        <span>Избранное</span>
+        <span class="favorites-count">{{ favoritePairs().length }}</span>
+      </div>
+
+      @for(pair of favoritePairs(); track pair.symbol){
+      <div class="pair-row favorite" (click)="selectPair(pair, $event)">
+        <div class="favorite-col">
+          <button
+            class="favorite-btn active"
+            (click)="toggleFavorite(pair.symbol, $event)"
+          ></button>
+        </div>
+        <div class="col-pair">
+          <strong>{{ pair.symbol }}</strong>
+        </div>
+        <div class="col-price right">{{ pair.lastPrice | number : '1.2-8' }}</div>
+        <div
+          class="col-change right"
+          [class.positive]="pair.priceChangePercent > 0"
+          [class.negative]="pair.priceChangePercent < 0"
+        >
+          {{ pair.priceChangePercent >= 0 ? '+' : ''
+          }}{{ pair.priceChangePercent | number : '1.2-2' }}%
+        </div>
+        <div class="col-volume right">{{ pair.volume | number : '1.0-0' }}</div>
+      </div>
+      }
+
+      <div class="favorites-divider"></div>
+    </div>
+    }
+
+    <div
+      *cdkVirtualFor="let pair of regularPairs(); trackBy: trackBySymbol"
+      class="pair-row"
+      [class.favorite]="pair.isFavorite"
+      (click)="selectPair(pair, $event)"
+    >
+      <div class="favorite-col">
+        <button
+          class="favorite-btn"
+          (click)="toggleFavorite(pair.symbol, $event)"
+          [class.active]="pair.isFavorite"
+        >
+          F
+        </button>
+      </div>
+
+      <div class="col-pair">
+        <strong>{{ pair.symbol }}</strong>
+      </div>
+      <div class="col-price right">{{ pair.lastPrice | number : '1.2-8' }}</div>
+      <div
+        class="col-change right"
+        [class.positive]="pair.priceChangePercent > 0"
+        [class.negative]="pair.priceChangePercent < 0"
+      >
+        {{ pair.priceChangePercent >= 0 ? '+' : '' }}
+        {{ pair.priceChangePercent | number : '1.2-2' }}%
+      </div>
+      <div class="col-volume right">{{ pair.volume | number : '1.0-0' }}</div>
+    </div>
+
+    @if(loading()){
+    <div class="empty-state">
+      <p>Загрузка пар...</p>
+    </div>
+    } @if(!loading() && regularPairs().length === 0 && favoritePairs().length === 0){
+    <div class="empty-state">
+      <p>Ничего не найдено</p>
+    </div>
+    }
+  </cdk-virtual-scroll-viewport>
+</div>

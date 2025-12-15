@@ -1,7 +1,7 @@
 import { effect, Injectable, signal, untracked } from '@angular/core';
 import { BinanceMessage } from '../types/BinanceMessage.inteface';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { filter, map, Observable, share, shareReplay } from 'rxjs';
+import { filter, map, Observable, shareReplay } from 'rxjs';
 import { BinanceInterval } from '../types/knile.interface';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class BinanceWssService {
 
   constructor() {
     effect(() => {
-      const sym = this._symbol();
+      const sym = this._symbol()?.toLowerCase();
       const int = this._interval();
       untracked(() => {
         if (sym && int) {
@@ -65,7 +65,7 @@ export class BinanceWssService {
 
     const ws = webSocket<BinanceMessage>({
       url,
-      openObserver: { next: () => console.log('WS Connected:', symbol.toUpperCase()) },
+      openObserver: { next: () => console.log('WS Connected:', symbol) },
       closeObserver: { next: () => console.log('WS Disconnected') },
     });
 
