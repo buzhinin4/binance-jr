@@ -1,8 +1,14 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { pairsFeature } from './pairs.reducer';
 
-export const { selectPairsState, selectPairs, selectFavorites, selectLoading, selectError } =
-  pairsFeature;
+export const {
+  selectPairsState,
+  selectPairs,
+  selectSelectedPair,
+  selectFavorites,
+  selectLoading,
+  selectError,
+} = pairsFeature;
 
 export const selectPairsWithFavorite = createSelector(
   selectPairs,
