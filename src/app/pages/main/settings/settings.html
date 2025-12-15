@@ -1,0 +1,26 @@
+<div class="overlay" (click)="onClose()"></div>
+
+<div class="modal">
+  <h2>Settings</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label class="row">
+      <input type="checkbox" formControlName="smaEnabled" />
+      <span>SMA</span>
+
+      <input type="number" formControlName="smaPeriod" placeholder="Period" class="number" />
+    </label>
+
+    <label class="row">
+      <input type="checkbox" formControlName="emaEnabled" />
+      <span>EMA</span>
+
+      <input type="number" formControlName="emaPeriod" placeholder="Period" class="number" />
+    </label>
+
+    <div class="buttons">
+      <button type="button" class="cancel" (click)="onClose()">Cancel</button>
+      <button type="submit" [disabled]="!form.valid" class="save">Save</button>
+    </div>
+  </form>
+</div>
