@@ -6,6 +6,7 @@ export const pairsFeatureKey = 'pairs';
 
 export interface State {
   pairs: BinancePair[];
+  selectedPair: BinancePair | null;
   favorites: string[];
   loading: boolean;
   error: any;
@@ -13,6 +14,7 @@ export interface State {
 
 export const initialState: State = {
   pairs: [],
+  selectedPair: null,
   favorites: JSON.parse(localStorage.getItem('favorites') || '[]'),
   loading: false,
   error: null,
@@ -27,16 +29,37 @@ export const reducer = createReducer(
     error: null,
   })),
 
-  on(PairsActions.loadSuccess, (state, { pairs }) => ({
-    ...state,
-    pairs,
-    loading: false,
-  })),
+  on(PairsActions.loadSuccess, (state, { pairs }) => {
+    let selectedPair = state.selectedPair;
+
+    if (!selectedPair) {
+      if (state.favorites.length > 0) {
+        const favSymbol = state.favorites[0];
+        selectedPair = pairs.find((p) => p.symbol === favSymbol) || null;
+      }
+
+      if (!selectedPair && pairs.length > 1) {
+        selectedPair = pairs[0];
+      }
+    }
+
+    return {
+      ...state,
+      pairs,
+      selectedPair,
+      loading: false,
+    };
+  }),
 
   on(PairsActions.loadFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,
+  })),
+
+  on(PairsActions.select, (state, { selectedPair }) => ({
+    ...state,
+    selectedPair,
   })),
 
   on(PairsActions.toggleFavorite, (state, { symbol }) => {

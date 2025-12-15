@@ -8,6 +8,8 @@ export const PairsActions = createActionGroup({
     'load success': props<{ pairs: BinancePair[] }>(),
     'load failure': props<{ error: any }>(),
 
+    select: props<{ selectedPair: BinancePair }>(),
+
     'toggle favorite': props<{ symbol: string }>(),
   },
 });
