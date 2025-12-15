@@ -1,0 +1,26 @@
+<div class="trades-wrapper">
+  <div class="side trades">
+    <div class="side--header">
+      <h3>Last trades</h3>
+      <h4>price</h4>
+      <h4>volume</h4>
+    </div>
+
+    @if (!isLoading()) {
+    <div class="side--grid">
+      @for (trade of trades(); track trade.id) {
+      <span class="price trade" [class.buy]="!trade.isSell" [class.sell]="trade.isSell">
+        {{ trade.price }}
+      </span>
+
+      <span class="qty trade" [class.buy]="!trade.isSell" [class.sell]="trade.isSell">
+        {{ trade.volume }}
+      </span>
+      }
+    </div>
+
+    } @else {
+    <span>trades loading</span>
+    }
+  </div>
+</div>
