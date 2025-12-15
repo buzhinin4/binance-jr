@@ -1,0 +1,15 @@
+:host {
+  display: grid;
+}
+
+app-graph,
+.depth-aggTrades-wrapper {
+  margin-top: var(--gap);
+}
+
+.depth-aggTrades-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--gap);
+  padding: 0 var(--gap);
+}
