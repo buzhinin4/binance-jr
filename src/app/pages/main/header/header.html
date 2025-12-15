@@ -1,0 +1,77 @@
+<header>
+  <div class="item">
+    <span class="label">Favorite</span>
+    <button class="favorite" (click)="toggleFavorite()">F</button>
+  </div>
+
+  <div class="pair">
+    <span class="label">Pair</span>
+
+    <button (click)="togglePairsList()">
+      <h1>{{ symbol() | uppercase }}</h1>
+    </button>
+    @if(isPairsListOpen()){
+    <app-pairs-list (close)="togglePairsList()"></app-pairs-list>
+    }
+  </div>
+
+  <div class="item">
+    <span class="label">Price</span>
+    <h2>{{ markPrice() }}</h2>
+  </div>
+
+  <div class="item">
+    <span class="label">Price change</span>
+    <h2>{{ indexPrice() }}</h2>
+  </div>
+
+  <div class="item">
+    <span class="label">High 24h</span>
+    <h2>{{ highPrice() }}</h2>
+  </div>
+
+  <div class="item">
+    <span class="label">Low 24h</span>
+    <h2>{{ lowPrice() }}</h2>
+  </div>
+
+  <div class="item">
+    <span class="label">Volume</span>
+    <h2>{{ volume() }}</h2>
+  </div>
+
+  <div class="item">
+    <span class="label">Funding rate</span>
+    <h2>{{ fundingRate() }}</h2>
+  </div>
+</header>
+
+<div class="settings">
+  <div class="item">
+    <span class="label">Indicators</span>
+
+    <button (click)="toggleIndicators()">Indicators</button>
+
+    @if (isIndicatorsOpen()) {
+    <app-settings (close)="toggleIndicators()"></app-settings>
+    }
+  </div>
+
+  <div class="item">
+    <span class="label">Kline interval</span>
+
+    <select #sel (change)="selectInterval(sel.value)">
+      @for (i of intervals; track i) {
+      <option [value]="i" [selected]="i === interval()">{{ i }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="item">
+    <span class="label">Theme</span>
+
+    <button (click)="toggleTheme()">
+      {{ theme() }}
+    </button>
+  </div>
+</div>
