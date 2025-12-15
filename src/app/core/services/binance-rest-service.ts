@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, forkJoin, map, Observable } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
 import { BinancePair, ExchangeInfo } from '../types/pair.interface';
 import { BinanceInterval, BinanceKline } from '../types/knile.interface';
 import { BinanceBid, BinanceDepth, BinanceLimit } from '../types/depth.interface';
+import { aggTrade } from '../types/aggTrade.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +71,27 @@ export class BinanceRestService {
               ([price, quantity]: [string, string]) => ({ price, quantity } as BinanceBid)
             ),
           } as BinanceDepth)
+      )
+    );
+  }
+
+  getAggTrades(symbol: string, limit = 20): Observable<aggTrade[]> {
+    const params = new HttpParams()
+      .set('symbol', symbol.toUpperCase())
+      .set('limit', limit.toString());
+
+    return this.http.get<any[]>(`${this.URL}/fapi/v1/aggTrades`, { params }).pipe(
+      map((raw) =>
+        raw.map(
+          (trade) =>
+            ({
+              id: trade.a,
+              price: trade.p,
+              volume: trade.q,
+              time: trade.T,
+              isSell: trade.m,
+            } as aggTrade)
+        )
       )
     );
   }

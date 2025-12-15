@@ -1,5 +1,7 @@
 export interface aggTrade {
-  price: number; // "p"
-  volume: number; // "q" in BTC
+  id: number; // "a"
+  price: string; // "p"
+  volume: string; // "q"
   time: number; // "T"
+  isSell: boolean; // "m"
 }
