@@ -16,6 +16,8 @@ import { klinesFeature } from './store/klines/klines.reducer';
 import { KlinesEffects } from './store/klines/klines.effects';
 import { indicatorsFeature } from './store/indicators/indicators.reducer';
 import { IndicatorsEffects } from './store/indicators/indicators.effects';
+import { aggTradesFeature } from './store/aggTrades/aggTrades.reducer';
+import { AggTradesEffects } from './store/aggTrades/aggTrades.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,8 +29,9 @@ export const appConfig: ApplicationConfig = {
       [pairsFeature.name]: pairsFeature.reducer,
       [klinesFeature.name]: klinesFeature.reducer,
       [indicatorsFeature.name]: indicatorsFeature.reducer,
+      [aggTradesFeature.name]: aggTradesFeature.reducer,
     }),
-    provideEffects([PairsEffects, KlinesEffects, IndicatorsEffects]),
+    provideEffects([PairsEffects, KlinesEffects, IndicatorsEffects, AggTradesEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };
