@@ -50,7 +50,7 @@ h2 {
 
   justify-content: center;
 
-  margin: 0 20px;
+  margin: 0 var(--gap);
   padding: 6px 0px;
 
   background: var(--color-bg-secondary);
