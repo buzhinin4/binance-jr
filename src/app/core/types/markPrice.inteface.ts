@@ -1,5 +1,5 @@
 export interface markPrice {
-  markPrice: number; // "p"
-  indexPrice: number; // "i"
-  fundingRate: number; // "r"
+  p: number; // "markPrice"
+  i: number; // "indexPrice"
+  r: number; // "fundingRate"
 }
